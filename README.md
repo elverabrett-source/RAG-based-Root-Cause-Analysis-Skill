@@ -1,39 +1,59 @@
-# 🚀 企业级专家 RCA (根因分析) Skill
+# 故障专家.skill
 
-这是一个基于 **LangChain 0.3** 和 **Hybrid RAG** 技术的智能故障排障 Skill。它通过结合语义搜索与关键字搜索（BM25），配合重排序模型 (Reranker)，能够以“技能插件”的形式精准定位运维事故的根源。
+> “从此以后，生产环境不止有告警，还有一个懂一切的它。”
 
-## 🌟 核心特性
-- **混合检索 (Hybrid Search)**: 结合向量数据库与 BM25，对技术术语（如错误码、IP地址）的匹配极其精准。
-- **语义重排序 (Reranker)**: 使用 Cross-Encoder 模型对召回结果进行高精度二次排序，彻底消除 AI “幻觉”。
-- **多轮交互推导**: 具备 Session 记忆，可针对故障现象进行连续追问，支持深层逻辑分析。
-- **企业级集成**: 提供 FastAPI 异步接口，支持钉钉群机器人自动推送分析报告。
-
-## 🛠️ 快速开始
-
-### 1. 环境准备
-```bash
-pip install -r requirements.txt
-```
-
-### 2. 配置环境变量
-将 `.env.template` 重命名为 `.env` 并填写您的配置：
-- `ZHIPUAI_API_KEY`: 智谱 AI 的 API Key。
-- `DINGTALK_WEBHOOK`: 钉钉机器人 Webhook 地址。
-
-### 3. 初始化知识库
-将您的排障文档 (Markdown 格式) 放入 `data/knowledge_base/` 目录下。
-
-### 4. 启动服务
-```bash
-python scripts/server.py
-```
-
-## 📂 项目结构
-- `scripts/retrieval.py`: 混合检索与重排序核心逻辑。
-- `scripts/analyze.py`: 专家级分析引擎。
-- `scripts/memory_store.py`: 多轮会话管理。
-- `scripts/server.py`: FastAPI 服务入口。
+![License](https://img.shields.io/badge/License-MIT-yellow.svg) 
+![Python](https://img.shields.io/badge/Python-3.12+-blue.svg) 
+![Skill](https://img.shields.io/badge/Expert-Skill-purple.svg) 
+![RAG](https://img.shields.io/badge/Core-Hybrid_RAG-orange.svg) 
+![Status](https://img.shields.io/badge/Standard-AgentSkills-brightgreen.svg)
 
 ---
-> [!IMPORTANT]
-> **安全提醒**: 请勿将 `.env` 文件提交至代码仓库，本仓库已内置 `.gitignore`。
+
+服务崩了，但排障文档还在？
+三年的积累，变成 Wiki 里一个不敢点开的搜索框？
+你还记得去年双十一那个类似的问题其实是可以通过一行指令定位的吗？
+
+**将运维经验凝炼成 Skill，不是为了记录，是为了不再重复。**
+
+提供故障现象、系统日志、监控截图，加上你的初步判断
+生成一个**专家级**的 AI 诊断报告
+用它的逻辑告诉你什么时间该重启、什么时间该扩容、什么时间该修复索引。
+
+[数据来源](#) · [安装说明](#) · [使用示例](#) · [效果展示](#) · [English](#)
+
+---
+
+## 🏗️ 技能架构
+
+```mermaid
+graph TD
+    A[故障特征] --> B{混合检索 Skill}
+    B -->|高频词匹配| C[BM25 引擎]
+    B -->|深层语义| D[Chroma 向量库]
+    C & D --> E[初筛选上下文]
+    E --> F[Cross-Encoder 重排序]
+    F -->|Top-3 核心知识| G[GLM-4 逻辑推导]
+    G --> H[专家排障报告]
+```
+
+## 🌟 为什么这个 Skill 不同寻常？
+
+### 1. 它是具备“嗅觉”的 (Hybrid Search)
+与普通的 RAG 不同，这个 Skill 对技术细节具备病态的敏感。无论是 `5432` 端口还是反人类的 `ORA-600` 错误码，它都能像猎犬一样从万级文档中瞬间锁定真相。
+
+### 2. 它是具备“记忆”的 (Stateful RCA)
+排障不是一锤子买卖。它支持 Session 状态追踪，AI 会根据你的反馈不断迭代结论。它不再是只会点头的助手，而是会主动向你索要证据的“高级工程师”。
+
+### 3. 它是具备“审美”的 (Structured Push)
+每一份输出不仅是文字，更是符合运维标准的诊断书。它懂得什么时候该通过钉钉给你推送告警，什么时候该安静地待在后台。
+
+## 📂 快速加载
+
+1. **载入依赖**: `pip install -r requirements.txt`
+2. **注入灵魂**: 将 Markdown 排障文档放入 `data/knowledge_base/`
+3. **唤醒 Skill**: `python scripts/server.py`
+4. **效果验证**: `python scripts/test_expert.py`
+
+---
+> “运维不只是冷冰冰的指令，还有数字世界的秩序与守护。”
