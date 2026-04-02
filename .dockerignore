@@ -1,0 +1,16 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.env
+data/vector_db/
+logs/
+.git/
+.gitignore
+README.md
+Dockerfile
+.dockerignore
